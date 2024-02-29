@@ -101,10 +101,11 @@ Data columns (total 26 columns):
 dtypes: int64(8), object(18)
 
 Initial observations:
-1. There are 'NaN' values in the dataset and 'car' column seems to have the most of it
-2. passanger column name is misspelled
-3. Many features are of dtype object
-4. There are a lot of categorical features
+1. We have 12684 entries and 26 columns
+2. There are 'NaN' values in the dataset and 'car' column seems to have the most of it
+3. passanger column name is misspelled
+4. Many features are of dtype object
+5. There are a lot of categorical features
 
 ### 2.2 Early Data Exploration and Quality Check
 In this section, we determine the following:
@@ -169,8 +170,7 @@ By far, the `car` column has a large number of missing values. Most likey desici
 
 First lets view the value counts for each column to understand the structure:
 
-<ValueCounts>
-------------------------
+<details>
 
 | destination     |   count |
 |:----------------|--------:|
@@ -398,7 +398,7 @@ First lets view the value counts for each column to understand the structure:
 |   1 |    7210 |
 |   0 |    5474 |
 
-</ValueCounts>
+</details>
 
 Based on analysing the above, the following decisions are taken:
 
@@ -409,4 +409,522 @@ Based on analysing the above, the following decisions are taken:
 5. income - use average value of the given range
 6. Convert Bar, CarryAway, RestaurantX, CoffeeHouse columns to numeric
 7. Convert age column to numeric
+
+## 3. Data Preparation
+In this section, we will act on the observation and decisions taken above.
+
+1. Remove duplicates
+2. Fill null values or remove them
+3. Fix all structural issues
+
+With the duplicates removed our dataset size is : (12610, 26)
+
+##### <font color='blue'>The `car` column was dropped as filling it based on other columns would only be redundant anyway.</font>
+
+For the `Bar` `CoffeeHouse` `CarryAway` `RestaurantLessThan20`  `Restaurant20To50` columns the following approach was used:
+#### <font color='blue'> Find the high, low, median acceptance rate for coupun type and use them to fill the missing values</font>
+
+Let X be one of `Bar` `CoffeeHouse` `CarryAway` `RestaurantLessThan20`  `Restaurant20To50`
+1. Group data by X, coupon and find mean value of Y
+2. Use the dataframe above to get the highest mean for coupon=X and its corresponding X value
+3. Do the same to get lowest mean for coupon=X and its corresponding X value
+4. The above two can be used to fill the missing values when coupon=X and Y is 1 or 0
+5. For those missing values where coupon is not same as X, get the median mean value and its label.
+
+After fixing all the structural issues, the dtypes look like this:
+
+destination             object
+passenger               object
+weather                 object
+temperature              int64
+time                    object
+coupon                  object
+expiration              object
+gender                  object
+age                      int64
+maritalStatus           object
+has_children             int64
+education               object
+occupation              object
+income                   int64
+Bar                      int64
+CoffeeHouse              int64
+CarryAway                int64
+RestaurantLessThan20     int64
+Restaurant20To50         int64
+toCoupon_GEQ5min         int64
+toCoupon_GEQ15min        int64
+toCoupon_GEQ25min        int64
+direction_same           int64
+direction_opp            int64
+Y                        int64
+
+And the value counts are:
+<details>
+
+------------------------
+
+| destination   |   count |
+|:--------------|--------:|
+| NonUrgent     |    6266 |
+| Home          |    3230 |
+| Work          |    3114 |
+------------------------
+
+| passenger   |   count |
+|:------------|--------:|
+| Alone       |    7248 |
+| Friends     |    3292 |
+| Partner     |    1069 |
+| Kids        |    1001 |
+------------------------
+
+| weather   |   count |
+|:----------|--------:|
+| Sunny     |   10011 |
+| Snowy     |    1397 |
+| Rainy     |    1202 |
+------------------------
+
+|   temperature |   count |
+|--------------:|--------:|
+|            80 |    6475 |
+|            55 |    3830 |
+|            30 |    2305 |
+------------------------
+
+| time   |   count |
+|:-------|--------:|
+| 6PM    |    3220 |
+| 7AM    |    3114 |
+| 10AM   |    2271 |
+| 2PM    |    2006 |
+| 10PM   |    1999 |
+------------------------
+
+| coupon            |   count |
+|:------------------|--------:|
+| Coffee House      |    3989 |
+| Restaurant(<20)   |    2779 |
+| Carry Out         |    2344 |
+| Bar               |    2010 |
+| Restaurant(20-50) |    1488 |
+------------------------
+
+| expiration   |   count |
+|:-------------|--------:|
+| 1d           |    7031 |
+| 2h           |    5579 |
+------------------------
+
+| gender   |   count |
+|:---------|--------:|
+| Female   |    6469 |
+| Male     |    6141 |
+------------------------
+
+|   age |   count |
+|------:|--------:|
+|    21 |    2642 |
+|    26 |    2548 |
+|    31 |    2019 |
+|    55 |    1781 |
+|    36 |    1317 |
+|    41 |    1089 |
+|    46 |     670 |
+|    20 |     544 |
+------------------------
+
+| maritalStatus     |   count |
+|:------------------|--------:|
+| Married partner   |    5068 |
+| Single            |    4716 |
+| Unmarried partner |    2185 |
+| Divorced          |     511 |
+| Widowed           |     130 |
+------------------------
+
+|   has_children |   count |
+|---------------:|--------:|
+|              0 |    7383 |
+|              1 |    5227 |
+------------------------
+
+| education            |   count |
+|:---------------------|--------:|
+| Some college         |    4325 |
+| Bachelors degree     |    4323 |
+| Graduate degree      |    1827 |
+| Associates degree    |    1148 |
+| High School Graduate |     899 |
+| Some High School     |      88 |
+------------------------
+
+| occupation                           |   count |
+|:-------------------------------------|--------:|
+| Unemployed                           |    1861 |
+| Student                              |    1575 |
+| Computer&Mathematical                |    1390 |
+| Sales&Related                        |    1088 |
+| Education&Training&Library           |     939 |
+| Management                           |     821 |
+| Office&AdministrativeSupport         |     638 |
+| ArtsDesignEntertainmentSports&Media  |     627 |
+| Business&Financial                   |     543 |
+| Retired                              |     493 |
+| FoodPreparation&ServingRelated       |     298 |
+| HealthcarePractitioners&Technical    |     244 |
+| HealthcareSupport                    |     242 |
+| Community&SocialServices             |     239 |
+| Legal                                |     219 |
+| Transportation&MaterialMoving        |     218 |
+| Architecture&Engineering             |     175 |
+| PersonalCare&Service                 |     175 |
+| ProtectiveService                    |     174 |
+| LifePhysicalSocialScience            |     169 |
+| Construction&Extraction              |     154 |
+| InstallationMaintenance&Repair       |     133 |
+| ProductionOccupations                |     108 |
+| Building&GroundsCleaning&Maintenance |      44 |
+| FarmingFishing&Forestry              |      43 |
+------------------------
+
+|   income |   count |
+|---------:|--------:|
+|    31249 |    2006 |
+|    18749 |    1825 |
+|    43749 |    1795 |
+|   125000 |    1717 |
+|    56249 |    1655 |
+|     6250 |    1034 |
+|    93749 |     879 |
+|    81249 |     856 |
+|    68749 |     843 |
+------------------------
+
+|   Bar |   count |
+|------:|--------:|
+|     0 |    5191 |
+|     1 |    3438 |
+|     3 |    2554 |
+|     8 |    1079 |
+|    10 |     348 |
+------------------------
+
+|   CoffeeHouse |   count |
+|--------------:|--------:|
+|             1 |    3362 |
+|             3 |    3344 |
+|             0 |    2985 |
+|             8 |    1812 |
+|            10 |    1107 |
+------------------------
+
+|   CarryAway |   count |
+|------------:|--------:|
+|           3 |    4774 |
+|           8 |    4260 |
+|           1 |    1852 |
+|          10 |    1572 |
+|           0 |     152 |
+------------------------
+
+|   RestaurantLessThan20 |   count |
+|-----------------------:|--------:|
+|                      3 |    5458 |
+|                      8 |    3577 |
+|                      1 |    2074 |
+|                     10 |    1282 |
+|                      0 |     219 |
+------------------------
+
+|   Restaurant20To50 |   count |
+|-------------------:|--------:|
+|                  1 |    6056 |
+|                  3 |    3433 |
+|                  0 |    2122 |
+|                  8 |     735 |
+|                 10 |     264 |
+------------------------
+
+|   toCoupon_GEQ5min |   count |
+|-------------------:|--------:|
+|                  1 |   12610 |
+------------------------
+
+|   toCoupon_GEQ15min |   count |
+|--------------------:|--------:|
+|                   1 |    7059 |
+|                   0 |    5551 |
+------------------------
+
+|   toCoupon_GEQ25min |   count |
+|--------------------:|--------:|
+|                   0 |   11147 |
+|                   1 |    1463 |
+------------------------
+
+|   direction_same |   count |
+|-----------------:|--------:|
+|                0 |    9892 |
+|                1 |    2718 |
+------------------------
+distance between histograms
+
+</details>
+
+Now that we have our final data, we are ready to do more analysis.
+
+## 4. Data Understanding (Again)
+Here we will do the following:
+1. Exploratory Data Analysis through code and visualization
+2. Remove any outliers if any
+3. Find correlation between attributes
+4. Draw a general hypothesis on the whole dataset with regards to acceptance rate
+
+Lets check the overall heatmap for correlation
+![alt text](image-8.png)
+
+#### <font color = 'blue'>The above heatmap does not make sense. It shows poor correlation between features, especially between features and the target variable 'Y'. This could be due to the data being mixed up with all coupon types. Later we will redo the heatmap on per coupon data</font>
+
+### 4.1 Outlier Check
+
+Lets view the overall histograms of all numerical attirbutes to check for outliers:
+
+![alt text](image.png)
+
+We don't see any attribute that has prominent outliers.
+##### <font color='blue'> One interesting outcome from the above plot is that`toCoupon_GEQ5mins` adds no value to the dataset, it is always set to 1.We can drop this column </font>
+
+### 4.2 Exploratory Data Analysis
+Here we will find correlation and plot visualization of various attributes on whole data set first and then dig deeper into each coupon type.
+
+#### 4.2.1 Income Attribute Analysis
+Below shows a box plot and the coupon acceptance histogram:
+![alt text](images/image-1.png)
+
+![alt text](images/image-2.png)
+
+Income does not seem to have any effect on coupon acceptance. The distribution of income is not showing anything interesting either.
+
+#### 4.2.2 Age Attribute Analysis
+The coupon acceptance by `age` histogram is not very interesting in terms of acceptance rate.
+![alt text](images/image-3.png)
+
+#### 4.2.3 Passenger Attribute Analysis
+Here we see that drivers with Friends or Partners show slightly higher acceptance rate
+![alt text](images/image-4.png)
+
+The mean acceptance rate by passenger type is below:
+
+'| passenger   |        Y |\n|:------------|---------:|\n| Alone       | 0.524421 |\n| Friends     | 0.673147 |\n| Kids        | 0.504496 |\n| Partner     | 0.594013 |'
+
+#### 4.2.4 Coupon Attribute Analysis
+Below shows that `coupon` values Carry Out and Restaurant(<20>) have higher acceptance rate
+
+![alt text](images/image-5.png)
+
+The mean acceptance rate by coupon type is below:
+
+'| coupon            |        Y |\n|:------------------|---------:|\n| Bar               | 0.40995  |\n| Carry Out         | 0.733788 |\n| Coffee House      | 0.498621 |\n| Restaurant(20-50) | 0.441532 |\n| Restaurant(<20)   | 0.707809 |'
+
+#### 4.2.5 Other Attribute Analysis
+Lets check the mean acceptance rate for all other attributes to see which ones are interesting
+
+<details>
+| destination   |        Y |
+|:--------------|---------:|
+| Home          | 0.506192 |
+| NonUrgent     | 0.633418 |
+| Work          | 0.498715 |
+| passenger   |        Y |
+|:------------|---------:|
+| Alone       | 0.524421 |
+| Friends     | 0.673147 |
+| Kids        | 0.504496 |
+| Partner     | 0.594013 |
+| weather   |        Y |
+|:----------|---------:|
+| Rainy     | 0.463394 |
+| Snowy     | 0.471725 |
+| Sunny     | 0.593447 |
+|   temperature |        Y |
+|--------------:|---------:|
+|            30 | 0.531453 |
+|            55 | 0.536815 |
+|            80 | 0.59861  |
+| time   |        Y |
+|:-------|---------:|
+| 10AM   | 0.607662 |
+| 10PM   | 0.508254 |
+| 2PM    | 0.661515 |
+| 6PM    | 0.584161 |
+| 7AM    | 0.498715 |
+| coupon            |        Y |
+|:------------------|---------:|
+| Bar               | 0.40995  |
+| Carry Out         | 0.733788 |
+| Coffee House      | 0.498621 |
+| Restaurant(20-50) | 0.441532 |
+| Restaurant(less than 20)   | 0.707809 |
+| expiration   |        Y |
+|:-------------|---------:|
+| 1d           | 0.624378 |
+| 2h           | 0.495967 |
+| gender   |        Y |
+|:---------|---------:|
+| Female   | 0.546452 |
+| Male     | 0.589806 |
+|   age |        Y |
+|------:|---------:|
+|    20 | 0.632353 |
+|    21 | 0.597653 |
+|    26 | 0.595369 |
+|    31 | 0.545815 |
+|    36 | 0.535308 |
+|    41 | 0.572084 |
+|    46 | 0.573134 |
+|    55 | 0.507019 |
+| maritalStatus     |        Y |
+|:------------------|---------:|
+| Divorced          | 0.526419 |
+| Married partner   | 0.542423 |
+| Single            | 0.604538 |
+| Unmarried partner | 0.561098 |
+| Widowed           | 0.476923 |
+|   has_children |        Y |
+|---------------:|---------:|
+|              0 | 0.586347 |
+|              1 | 0.541037 |
+| education            |        Y |
+|:---------------------|---------:|
+| Associates degree    | 0.552265 |
+| Bachelors degree     | 0.554013 |
+| Graduate degree      | 0.523262 |
+| High School Graduate | 0.591769 |
+| Some High School     | 0.715909 |
+| Some college         | 0.595838 |
+| occupation                           |        Y |
+|:-------------------------------------|---------:|
+| Architecture&Engineering             | 0.634286 |
+| ArtsDesignEntertainmentSports&Media  | 0.516746 |
+| Building&GroundsCleaning&Maintenance | 0.590909 |
+| Business&Financial                   | 0.569061 |
+| Community&SocialServices             | 0.485356 |
+| Computer&Mathematical                | 0.566187 |
+| Construction&Extraction              | 0.688312 |
+| Education&Training&Library           | 0.521832 |
+| FarmingFishing&Forestry              | 0.534884 |
+| FoodPreparation&ServingRelated       | 0.583893 |
+| HealthcarePractitioners&Technical    | 0.67623  |
+| HealthcareSupport                    | 0.698347 |
+| InstallationMaintenance&Repair       | 0.533835 |
+| Legal                                | 0.47032  |
+| LifePhysicalSocialScience            | 0.579882 |
+| Management                           | 0.585871 |
+| Office&AdministrativeSupport         | 0.600313 |
+| PersonalCare&Service                 | 0.548571 |
+| ProductionOccupations                | 0.62037  |
+| ProtectiveService                    | 0.643678 |
+| Retired                              | 0.456389 |
+| Sales&Related                        | 0.5625   |
+| Student                              | 0.609524 |
+| Transportation&MaterialMoving        | 0.59633  |
+| Unemployed                           | 0.547555 |
+|   income |        Y |
+|---------:|---------:|
+|     6250 | 0.591876 |
+|    18749 | 0.573699 |
+|    31249 | 0.59322  |
+|    43749 | 0.562674 |
+|    56249 | 0.594562 |
+|    68749 | 0.525504 |
+|    81249 | 0.483645 |
+|    93749 | 0.52901  |
+|   125000 | 0.577752 |
+|   Bar |        Y |
+|------:|---------:|
+|     0 | 0.529956 |
+|     1 | 0.563118 |
+|     3 | 0.618637 |
+|     8 | 0.638554 |
+|    10 | 0.577586 |
+|   CoffeeHouse |        Y |
+|--------------:|---------:|
+|             0 | 0.451591 |
+|             1 | 0.546996 |
+|             3 | 0.647727 |
+|             8 | 0.639073 |
+|            10 | 0.583559 |
+|   CarryAway |        Y |
+|------------:|---------:|
+|           0 | 0.532895 |
+|           1 | 0.4973   |
+|           3 | 0.581274 |
+|           8 | 0.58216  |
+|          10 | 0.572519 |
+|   RestaurantLessThan20 |        Y |
+|-----------------------:|---------:|
+|                      0 | 0.534247 |
+|                      1 | 0.531823 |
+|                      3 | 0.560462 |
+|                      8 | 0.586805 |
+|                     10 | 0.607644 |
+|   Restaurant20To50 |        Y |
+|-------------------:|---------:|
+|                  0 | 0.516023 |
+|                  1 | 0.555317 |
+|                  3 | 0.594232 |
+|                  8 | 0.658503 |
+|                 10 | 0.662879 |
+|   toCoupon_GEQ5min |        Y |
+|-------------------:|---------:|
+|                  1 | 0.567565 |
+|   toCoupon_GEQ15min |        Y |
+|--------------------:|---------:|
+|                   0 | 0.613763 |
+|                   1 | 0.531237 |
+|   toCoupon_GEQ25min |        Y |
+|--------------------:|---------:|
+|                   0 | 0.586974 |
+|                   1 | 0.419686 |
+|   direction_same |        Y |
+|-----------------:|---------:|
+|                0 | 0.563688 |
+|                1 | 0.581678 |
+|   direction_opp |        Y |
+|----------------:|---------:|
+|               0 | 0.581678 |
+|               1 | 0.563688 |
+|   Y |   Y |
+|----:|----:|
+|   0 |   0 |
+|   1 |   1 |
+
+</details>
+
+Apart from the attributes we already looked at, `education` and `expiration` seem interesting.
+
+##### <font color='blue'>Though `education` = 'Some High School' showed high acceptance rate, the number of entries for this is too low to be a good indicator</font>
+
+![alt text](images/image-6.png)
+
+`expiration` shows slightly higher acceptance rate for longer expiration
+
+![alt text](images/image-7.png)
+
+Before we go into deeper analysis of each coupon group, lets drop the `toCoupon_GEQ5min` column as per previous decision
+
+Index(['destination', 'passenger', 'weather', 'temperature', 'time', 'coupon',
+       'expiration', 'gender', 'age', 'maritalStatus', 'has_children',
+       'education', 'occupation', 'income', 'Bar', 'CoffeeHouse', 'CarryAway',
+       'RestaurantLessThan20', 'Restaurant20To50', 'toCoupon_GEQ15min',
+       'toCoupon_GEQ25min', 'direction_same', 'direction_opp', 'Y'],
+      dtype='object')
+
+
+
+
+
+
 
