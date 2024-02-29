@@ -689,9 +689,9 @@ Lets check the overall heatmap for correlation
 
 ### 4.1 Outlier Check
 
-Lets view the overall histograms of all numerical attirbutes to check for outliers:
+Lets view the overall histograms of all numerical attributes to check for outliers:
 
-![alt text](image.png)
+![alt text](images/image.png)
 
 We don't see any attribute that has prominent outliers.
 ##### <font color='blue'> One interesting outcome from the above plot is that`toCoupon_GEQ5mins` adds no value to the dataset, it is always set to 1.We can drop this column </font>
@@ -700,8 +700,7 @@ We don't see any attribute that has prominent outliers.
 Here we will find correlation and plot visualization of various attributes on whole data set first and then dig deeper into each coupon type.
 
 #### 4.2.1 Income Attribute Analysis
-Below shows a box plot and the coupon acceptance histogram:
-![alt text](images/image-1.png)
+Below shows the coupon acceptance histogram:
 
 ![alt text](images/image-2.png)
 
@@ -717,7 +716,7 @@ Here we see that drivers with Friends or Partners show slightly higher acceptanc
 
 The mean acceptance rate by passenger type is below:
 
-'| passenger   |        Y |\n|:------------|---------:|\n| Alone       | 0.524421 |\n| Friends     | 0.673147 |\n| Kids        | 0.504496 |\n| Partner     | 0.594013 |'
+'|    | passenger   |        Y |\n|---:|:------------|---------:|\n|  0 | Alone       | 0.524421 |\n|  1 | Friends     | 0.673147 |\n|  2 | Kids        | 0.504496 |\n|  3 | Partner     | 0.594013 |'
 
 #### 4.2.4 Coupon Attribute Analysis
 Below shows that `coupon` values Carry Out and Restaurant(<20>) have higher acceptance rate
@@ -726,180 +725,175 @@ Below shows that `coupon` values Carry Out and Restaurant(<20>) have higher acce
 
 The mean acceptance rate by coupon type is below:
 
-'| coupon            |        Y |\n|:------------------|---------:|\n| Bar               | 0.40995  |\n| Carry Out         | 0.733788 |\n| Coffee House      | 0.498621 |\n| Restaurant(20-50) | 0.441532 |\n| Restaurant(<20)   | 0.707809 |'
+'|    | coupon            |        Y |\n|---:|:------------------|---------:|\n|  0 | Bar               | 0.40995  |\n|  1 | Carry Out         | 0.733788 |\n|  2 | Coffee House      | 0.498621 |\n|  3 | Restaurant(20-50) | 0.441532 |\n|  4 | Restaurant(<20)   | 0.707809 |'
 
 #### 4.2.5 Other Attribute Analysis
 Lets check the mean acceptance rate for all other attributes to see which ones are interesting
 
 <details>
-| destination   |        Y |
-|:--------------|---------:|
-| Home          | 0.506192 |
-| NonUrgent     | 0.633418 |
-| Work          | 0.498715 |
-| passenger   |        Y |
-|:------------|---------:|
-| Alone       | 0.524421 |
-| Friends     | 0.673147 |
-| Kids        | 0.504496 |
-| Partner     | 0.594013 |
-| weather   |        Y |
-|:----------|---------:|
-| Rainy     | 0.463394 |
-| Snowy     | 0.471725 |
-| Sunny     | 0.593447 |
-|   temperature |        Y |
-|--------------:|---------:|
-|            30 | 0.531453 |
-|            55 | 0.536815 |
-|            80 | 0.59861  |
-| time   |        Y |
-|:-------|---------:|
-| 10AM   | 0.607662 |
-| 10PM   | 0.508254 |
-| 2PM    | 0.661515 |
-| 6PM    | 0.584161 |
-| 7AM    | 0.498715 |
-| coupon            |        Y |
-|:------------------|---------:|
-| Bar               | 0.40995  |
-| Carry Out         | 0.733788 |
-| Coffee House      | 0.498621 |
-| Restaurant(20-50) | 0.441532 |
-| Restaurant(less than 20)   | 0.707809 |
-| expiration   |        Y |
-|:-------------|---------:|
-| 1d           | 0.624378 |
-| 2h           | 0.495967 |
-| gender   |        Y |
-|:---------|---------:|
-| Female   | 0.546452 |
-| Male     | 0.589806 |
-|   age |        Y |
-|------:|---------:|
-|    20 | 0.632353 |
-|    21 | 0.597653 |
-|    26 | 0.595369 |
-|    31 | 0.545815 |
-|    36 | 0.535308 |
-|    41 | 0.572084 |
-|    46 | 0.573134 |
-|    55 | 0.507019 |
-| maritalStatus     |        Y |
-|:------------------|---------:|
-| Divorced          | 0.526419 |
-| Married partner   | 0.542423 |
-| Single            | 0.604538 |
-| Unmarried partner | 0.561098 |
-| Widowed           | 0.476923 |
-|   has_children |        Y |
-|---------------:|---------:|
-|              0 | 0.586347 |
-|              1 | 0.541037 |
-| education            |        Y |
-|:---------------------|---------:|
-| Associates degree    | 0.552265 |
-| Bachelors degree     | 0.554013 |
-| Graduate degree      | 0.523262 |
-| High School Graduate | 0.591769 |
-| Some High School     | 0.715909 |
-| Some college         | 0.595838 |
-| occupation                           |        Y |
-|:-------------------------------------|---------:|
-| Architecture&Engineering             | 0.634286 |
-| ArtsDesignEntertainmentSports&Media  | 0.516746 |
-| Building&GroundsCleaning&Maintenance | 0.590909 |
-| Business&Financial                   | 0.569061 |
-| Community&SocialServices             | 0.485356 |
-| Computer&Mathematical                | 0.566187 |
-| Construction&Extraction              | 0.688312 |
-| Education&Training&Library           | 0.521832 |
-| FarmingFishing&Forestry              | 0.534884 |
-| FoodPreparation&ServingRelated       | 0.583893 |
-| HealthcarePractitioners&Technical    | 0.67623  |
-| HealthcareSupport                    | 0.698347 |
-| InstallationMaintenance&Repair       | 0.533835 |
-| Legal                                | 0.47032  |
-| LifePhysicalSocialScience            | 0.579882 |
-| Management                           | 0.585871 |
-| Office&AdministrativeSupport         | 0.600313 |
-| PersonalCare&Service                 | 0.548571 |
-| ProductionOccupations                | 0.62037  |
-| ProtectiveService                    | 0.643678 |
-| Retired                              | 0.456389 |
-| Sales&Related                        | 0.5625   |
-| Student                              | 0.609524 |
-| Transportation&MaterialMoving        | 0.59633  |
-| Unemployed                           | 0.547555 |
-|   income |        Y |
-|---------:|---------:|
-|     6250 | 0.591876 |
-|    18749 | 0.573699 |
-|    31249 | 0.59322  |
-|    43749 | 0.562674 |
-|    56249 | 0.594562 |
-|    68749 | 0.525504 |
-|    81249 | 0.483645 |
-|    93749 | 0.52901  |
-|   125000 | 0.577752 |
-|   Bar |        Y |
-|------:|---------:|
-|     0 | 0.529956 |
-|     1 | 0.563118 |
-|     3 | 0.618637 |
-|     8 | 0.638554 |
-|    10 | 0.577586 |
-|   CoffeeHouse |        Y |
-|--------------:|---------:|
-|             0 | 0.451591 |
-|             1 | 0.546996 |
-|             3 | 0.647727 |
-|             8 | 0.639073 |
-|            10 | 0.583559 |
-|   CarryAway |        Y |
-|------------:|---------:|
-|           0 | 0.532895 |
-|           1 | 0.4973   |
-|           3 | 0.581274 |
-|           8 | 0.58216  |
-|          10 | 0.572519 |
-|   RestaurantLessThan20 |        Y |
-|-----------------------:|---------:|
-|                      0 | 0.534247 |
-|                      1 | 0.531823 |
-|                      3 | 0.560462 |
-|                      8 | 0.586805 |
-|                     10 | 0.607644 |
-|   Restaurant20To50 |        Y |
-|-------------------:|---------:|
-|                  0 | 0.516023 |
-|                  1 | 0.555317 |
-|                  3 | 0.594232 |
-|                  8 | 0.658503 |
-|                 10 | 0.662879 |
-|   toCoupon_GEQ5min |        Y |
-|-------------------:|---------:|
-|                  1 | 0.567565 |
-|   toCoupon_GEQ15min |        Y |
-|--------------------:|---------:|
-|                   0 | 0.613763 |
-|                   1 | 0.531237 |
-|   toCoupon_GEQ25min |        Y |
-|--------------------:|---------:|
-|                   0 | 0.586974 |
-|                   1 | 0.419686 |
-|   direction_same |        Y |
-|-----------------:|---------:|
-|                0 | 0.563688 |
-|                1 | 0.581678 |
-|   direction_opp |        Y |
-|----------------:|---------:|
-|               0 | 0.581678 |
-|               1 | 0.563688 |
-|   Y |   Y |
-|----:|----:|
-|   0 |   0 |
-|   1 |   1 |
+|    | destination   |        Y |
+|---:|:--------------|---------:|
+|  0 | Home          | 0.506192 |
+|  1 | NonUrgent     | 0.633418 |
+|  2 | Work          | 0.498715 |
+|    | passenger   |        Y |
+|---:|:------------|---------:|
+|  0 | Alone       | 0.524421 |
+|  1 | Friends     | 0.673147 |
+|  2 | Kids        | 0.504496 |
+|  3 | Partner     | 0.594013 |
+|    | weather   |        Y |
+|---:|:----------|---------:|
+|  0 | Rainy     | 0.463394 |
+|  1 | Snowy     | 0.471725 |
+|  2 | Sunny     | 0.593447 |
+|    |   temperature |        Y |
+|---:|--------------:|---------:|
+|  0 |            30 | 0.531453 |
+|  1 |            55 | 0.536815 |
+|  2 |            80 | 0.59861  |
+|    | time   |        Y |
+|---:|:-------|---------:|
+|  0 | 10AM   | 0.607662 |
+|  1 | 10PM   | 0.508254 |
+|  2 | 2PM    | 0.661515 |
+|  3 | 6PM    | 0.584161 |
+|  4 | 7AM    | 0.498715 |
+|    | coupon            |        Y |
+|---:|:------------------|---------:|
+|  0 | Bar               | 0.40995  |
+|  1 | Carry Out         | 0.733788 |
+|  2 | Coffee House      | 0.498621 |
+|  3 | Restaurant(20-50) | 0.441532 |
+|  4 | Restaurant(20)   | 0.707809 |
+|    | expiration   |        Y |
+|---:|:-------------|---------:|
+|  0 | 1d           | 0.624378 |
+|  1 | 2h           | 0.495967 |
+|    | gender   |        Y |
+|---:|:---------|---------:|
+|  0 | Female   | 0.546452 |
+|  1 | Male     | 0.589806 |
+|    |   age |        Y |
+|---:|------:|---------:|
+|  0 |    20 | 0.632353 |
+|  1 |    21 | 0.597653 |
+|  2 |    26 | 0.595369 |
+|  3 |    31 | 0.545815 |
+|  4 |    36 | 0.535308 |
+|  5 |    41 | 0.572084 |
+|  6 |    46 | 0.573134 |
+|  7 |    55 | 0.507019 |
+|    | maritalStatus     |        Y |
+|---:|:------------------|---------:|
+|  0 | Divorced          | 0.526419 |
+|  1 | Married partner   | 0.542423 |
+|  2 | Single            | 0.604538 |
+|  3 | Unmarried partner | 0.561098 |
+|  4 | Widowed           | 0.476923 |
+|    |   has_children |        Y |
+|---:|---------------:|---------:|
+|  0 |              0 | 0.586347 |
+|  1 |              1 | 0.541037 |
+|    | education            |        Y |
+|---:|:---------------------|---------:|
+|  0 | Associates degree    | 0.552265 |
+|  1 | Bachelors degree     | 0.554013 |
+|  2 | Graduate degree      | 0.523262 |
+|  3 | High School Graduate | 0.591769 |
+|  4 | Some High School     | 0.715909 |
+|  5 | Some college         | 0.595838 |
+|    | occupation                           |        Y |
+|---:|:-------------------------------------|---------:|
+|  0 | Architecture&Engineering             | 0.634286 |
+|  1 | ArtsDesignEntertainmentSports&Media  | 0.516746 |
+|  2 | Building&GroundsCleaning&Maintenance | 0.590909 |
+|  3 | Business&Financial                   | 0.569061 |
+|  4 | Community&SocialServices             | 0.485356 |
+|  5 | Computer&Mathematical                | 0.566187 |
+|  6 | Construction&Extraction              | 0.688312 |
+|  7 | Education&Training&Library           | 0.521832 |
+|  8 | FarmingFishing&Forestry              | 0.534884 |
+|  9 | FoodPreparation&ServingRelated       | 0.583893 |
+| 10 | HealthcarePractitioners&Technical    | 0.67623  |
+| 11 | HealthcareSupport                    | 0.698347 |
+| 12 | InstallationMaintenance&Repair       | 0.533835 |
+| 13 | Legal                                | 0.47032  |
+| 14 | LifePhysicalSocialScience            | 0.579882 |
+| 15 | Management                           | 0.585871 |
+| 16 | Office&AdministrativeSupport         | 0.600313 |
+| 17 | PersonalCare&Service                 | 0.548571 |
+| 18 | ProductionOccupations                | 0.62037  |
+| 19 | ProtectiveService                    | 0.643678 |
+| 20 | Retired                              | 0.456389 |
+| 21 | Sales&Related                        | 0.5625   |
+| 22 | Student                              | 0.609524 |
+| 23 | Transportation&MaterialMoving        | 0.59633  |
+| 24 | Unemployed                           | 0.547555 |
+|    |   income |        Y |
+|---:|---------:|---------:|
+|  0 |     6250 | 0.591876 |
+|  1 |    18749 | 0.573699 |
+|  2 |    31249 | 0.59322  |
+|  3 |    43749 | 0.562674 |
+|  4 |    56249 | 0.594562 |
+|  5 |    68749 | 0.525504 |
+|  6 |    81249 | 0.483645 |
+|  7 |    93749 | 0.52901  |
+|  8 |   125000 | 0.577752 |
+|    |   Bar |        Y |
+|---:|------:|---------:|
+|  0 |     0 | 0.529956 |
+|  1 |     1 | 0.563118 |
+|  2 |     3 | 0.618637 |
+|  3 |     8 | 0.638554 |
+|  4 |    10 | 0.577586 |
+|    |   CoffeeHouse |        Y |
+|---:|--------------:|---------:|
+|  0 |             0 | 0.451591 |
+|  1 |             1 | 0.546996 |
+|  2 |             3 | 0.647727 |
+|  3 |             8 | 0.639073 |
+|  4 |            10 | 0.583559 |
+|    |   CarryAway |        Y |
+|---:|------------:|---------:|
+|  0 |           0 | 0.532895 |
+|  1 |           1 | 0.4973   |
+|  2 |           3 | 0.581274 |
+|  3 |           8 | 0.58216  |
+|  4 |          10 | 0.572519 |
+|    |   RestaurantLessThan20 |        Y |
+|---:|-----------------------:|---------:|
+|  0 |                      0 | 0.534247 |
+|  1 |                      1 | 0.531823 |
+|  2 |                      3 | 0.560462 |
+|  3 |                      8 | 0.586805 |
+|  4 |                     10 | 0.607644 |
+|    |   Restaurant20To50 |        Y |
+|---:|-------------------:|---------:|
+|  0 |                  0 | 0.516023 |
+|  1 |                  1 | 0.555317 |
+|  2 |                  3 | 0.594232 |
+|  3 |                  8 | 0.658503 |
+|  4 |                 10 | 0.662879 |
+|    |   toCoupon_GEQ15min |        Y |
+|---:|--------------------:|---------:|
+|  0 |                   0 | 0.613763 |
+|  1 |                   1 | 0.531237 |
+|    |   toCoupon_GEQ25min |        Y |
+|---:|--------------------:|---------:|
+|  0 |                   0 | 0.586974 |
+|  1 |                   1 | 0.419686 |
+|    |   direction_same |        Y |
+|---:|-----------------:|---------:|
+|  0 |                0 | 0.563688 |
+|  1 |                1 | 0.581678 |
+|    |   direction_opp |        Y |
+|---:|----------------:|---------:|
+|  0 |               0 | 0.581678 |
+|  1 |               1 | 0.563688 |
+
+
 
 </details>
 
