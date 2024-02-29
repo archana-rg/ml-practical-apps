@@ -877,17 +877,25 @@ Here this is no strong correlation. This will need more analysis. But given the 
 ##### <font color='green'>1. Who should be offered the Bar coupon?</font>
 ###### <font color='blue'> Those who visit Bar more than once a month should be offered the Bar coupon</font>
 
-##### <font color='green'>1. Who should be offered the Carry Out coupon?</font>
+##### <font color='green'>2. Who should be offered the Carry Out coupon?</font>
 ###### <font color='blue'> Those who do CarryAway more than once a month should definitely be offered this coupon. Otherwise, lower income or younger than 25 or no kid passenger drivers should be offered this coupon</font>
 
-##### <font color='green'>1. Who should be offered the Restaurant 20-50 coupon?</font>
+##### <font color='green'>3. Who should be offered the Restaurant 20-50 coupon?</font>
 ###### <font color='blue'> Only when the drivers have frequented the business more than once a month or higher should be offered this coupon</font>
 
-##### <font color='green'>1. Who should be offered the CoffeeHouse coupon?</font>
+##### <font color='green'>4. Who should be offered the CoffeeHouse coupon?</font>
 ###### <font color='blue'> Based on quick analysis, we will go by frequency of business visit more than once a month</font>
 
-##### <font color='green'>1. Who should be offered the RestaurantLessThan20 coupon?</font>
+##### <font color='green'>5. Who should be offered the RestaurantLessThan20 coupon?</font>
 ###### <font color='blue'> Generally this is a good coupon to offer. Need more analysis to fine tune the criteria.</font>
+
+
+Some next steps:
+1. More data analysis of CoffeHouse and RestaurantLessThan20 coupons.
+2. Choosing the right model for the data
+3. Modeling the data and tuning it.
+4. Testing the model
+5. Deploying the model
 
 
 
