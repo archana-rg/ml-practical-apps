@@ -696,7 +696,7 @@ Lets view the overall histograms of all numerical attributes to check for outlie
 We don't see any attribute that has prominent outliers.
 ##### <font color='blue'> One interesting outcome from the above plot is that`toCoupon_GEQ5mins` adds no value to the dataset, it is always set to 1.We can drop this column </font>
 
-### 4.2 Exploratory Data Analysis
+### 4.2 Exploratory Data Analysis On Whole Dataset
 Here we will find correlation and plot visualization of various attributes on whole data set first and then dig deeper into each coupon type.
 
 #### 4.2.1 Income Attribute Analysis
@@ -715,8 +715,12 @@ Here we see that drivers with Friends or Partners show slightly higher acceptanc
 ![alt text](images/image-4.png)
 
 The mean acceptance rate by passenger type is below:
-
-'|    | passenger   |        Y |\n|---:|:------------|---------:|\n|  0 | Alone       | 0.524421 |\n|  1 | Friends     | 0.673147 |\n|  2 | Kids        | 0.504496 |\n|  3 | Partner     | 0.594013 |'
+|    | passenger   |        Y |
+|---:|:------------|---------:|
+|  0 | Alone       | 0.524421 |
+|  1 | Friends     | 0.673147 |
+|  2 | Kids        | 0.504496 |
+|  3 | Partner     | 0.594013 |
 
 #### 4.2.4 Coupon Attribute Analysis
 Below shows that `coupon` values Carry Out and Restaurant(<20>) have higher acceptance rate
@@ -725,76 +729,17 @@ Below shows that `coupon` values Carry Out and Restaurant(<20>) have higher acce
 
 The mean acceptance rate by coupon type is below:
 
-'|    | coupon            |        Y |\n|---:|:------------------|---------:|\n|  0 | Bar               | 0.40995  |\n|  1 | Carry Out         | 0.733788 |\n|  2 | Coffee House      | 0.498621 |\n|  3 | Restaurant(20-50) | 0.441532 |\n|  4 | Restaurant(<20)   | 0.707809 |'
-
-#### 4.2.5 Other Attribute Analysis
-Lets check the mean acceptance rate for all other attributes to see which ones are interesting
-
-<details>
-|    | destination   |        Y |
-|---:|:--------------|---------:|
-|  0 | Home          | 0.506192 |
-|  1 | NonUrgent     | 0.633418 |
-|  2 | Work          | 0.498715 |
-|    | passenger   |        Y |
-|---:|:------------|---------:|
-|  0 | Alone       | 0.524421 |
-|  1 | Friends     | 0.673147 |
-|  2 | Kids        | 0.504496 |
-|  3 | Partner     | 0.594013 |
-|    | weather   |        Y |
-|---:|:----------|---------:|
-|  0 | Rainy     | 0.463394 |
-|  1 | Snowy     | 0.471725 |
-|  2 | Sunny     | 0.593447 |
-|    |   temperature |        Y |
-|---:|--------------:|---------:|
-|  0 |            30 | 0.531453 |
-|  1 |            55 | 0.536815 |
-|  2 |            80 | 0.59861  |
-|    | time   |        Y |
-|---:|:-------|---------:|
-|  0 | 10AM   | 0.607662 |
-|  1 | 10PM   | 0.508254 |
-|  2 | 2PM    | 0.661515 |
-|  3 | 6PM    | 0.584161 |
-|  4 | 7AM    | 0.498715 |
 |    | coupon            |        Y |
 |---:|:------------------|---------:|
 |  0 | Bar               | 0.40995  |
 |  1 | Carry Out         | 0.733788 |
 |  2 | Coffee House      | 0.498621 |
 |  3 | Restaurant(20-50) | 0.441532 |
-|  4 | Restaurant(20)   | 0.707809 |
-|    | expiration   |        Y |
-|---:|:-------------|---------:|
-|  0 | 1d           | 0.624378 |
-|  1 | 2h           | 0.495967 |
-|    | gender   |        Y |
-|---:|:---------|---------:|
-|  0 | Female   | 0.546452 |
-|  1 | Male     | 0.589806 |
-|    |   age |        Y |
-|---:|------:|---------:|
-|  0 |    20 | 0.632353 |
-|  1 |    21 | 0.597653 |
-|  2 |    26 | 0.595369 |
-|  3 |    31 | 0.545815 |
-|  4 |    36 | 0.535308 |
-|  5 |    41 | 0.572084 |
-|  6 |    46 | 0.573134 |
-|  7 |    55 | 0.507019 |
-|    | maritalStatus     |        Y |
-|---:|:------------------|---------:|
-|  0 | Divorced          | 0.526419 |
-|  1 | Married partner   | 0.542423 |
-|  2 | Single            | 0.604538 |
-|  3 | Unmarried partner | 0.561098 |
-|  4 | Widowed           | 0.476923 |
-|    |   has_children |        Y |
-|---:|---------------:|---------:|
-|  0 |              0 | 0.586347 |
-|  1 |              1 | 0.541037 |
+|  4 | Restaurant(<20)   | 0.707809 |
+
+#### 4.2.5 Other Attribute Analysis
+After checking the mean acceptance rate for all other attributes, found the following to be interesting:
+
 |    | education            |        Y |
 |---:|:---------------------|---------:|
 |  0 | Associates degree    | 0.552265 |
@@ -803,101 +748,13 @@ Lets check the mean acceptance rate for all other attributes to see which ones a
 |  3 | High School Graduate | 0.591769 |
 |  4 | Some High School     | 0.715909 |
 |  5 | Some college         | 0.595838 |
-|    | occupation                           |        Y |
-|---:|:-------------------------------------|---------:|
-|  0 | Architecture&Engineering             | 0.634286 |
-|  1 | ArtsDesignEntertainmentSports&Media  | 0.516746 |
-|  2 | Building&GroundsCleaning&Maintenance | 0.590909 |
-|  3 | Business&Financial                   | 0.569061 |
-|  4 | Community&SocialServices             | 0.485356 |
-|  5 | Computer&Mathematical                | 0.566187 |
-|  6 | Construction&Extraction              | 0.688312 |
-|  7 | Education&Training&Library           | 0.521832 |
-|  8 | FarmingFishing&Forestry              | 0.534884 |
-|  9 | FoodPreparation&ServingRelated       | 0.583893 |
-| 10 | HealthcarePractitioners&Technical    | 0.67623  |
-| 11 | HealthcareSupport                    | 0.698347 |
-| 12 | InstallationMaintenance&Repair       | 0.533835 |
-| 13 | Legal                                | 0.47032  |
-| 14 | LifePhysicalSocialScience            | 0.579882 |
-| 15 | Management                           | 0.585871 |
-| 16 | Office&AdministrativeSupport         | 0.600313 |
-| 17 | PersonalCare&Service                 | 0.548571 |
-| 18 | ProductionOccupations                | 0.62037  |
-| 19 | ProtectiveService                    | 0.643678 |
-| 20 | Retired                              | 0.456389 |
-| 21 | Sales&Related                        | 0.5625   |
-| 22 | Student                              | 0.609524 |
-| 23 | Transportation&MaterialMoving        | 0.59633  |
-| 24 | Unemployed                           | 0.547555 |
-|    |   income |        Y |
-|---:|---------:|---------:|
-|  0 |     6250 | 0.591876 |
-|  1 |    18749 | 0.573699 |
-|  2 |    31249 | 0.59322  |
-|  3 |    43749 | 0.562674 |
-|  4 |    56249 | 0.594562 |
-|  5 |    68749 | 0.525504 |
-|  6 |    81249 | 0.483645 |
-|  7 |    93749 | 0.52901  |
-|  8 |   125000 | 0.577752 |
-|    |   Bar |        Y |
-|---:|------:|---------:|
-|  0 |     0 | 0.529956 |
-|  1 |     1 | 0.563118 |
-|  2 |     3 | 0.618637 |
-|  3 |     8 | 0.638554 |
-|  4 |    10 | 0.577586 |
-|    |   CoffeeHouse |        Y |
-|---:|--------------:|---------:|
-|  0 |             0 | 0.451591 |
-|  1 |             1 | 0.546996 |
-|  2 |             3 | 0.647727 |
-|  3 |             8 | 0.639073 |
-|  4 |            10 | 0.583559 |
-|    |   CarryAway |        Y |
-|---:|------------:|---------:|
-|  0 |           0 | 0.532895 |
-|  1 |           1 | 0.4973   |
-|  2 |           3 | 0.581274 |
-|  3 |           8 | 0.58216  |
-|  4 |          10 | 0.572519 |
-|    |   RestaurantLessThan20 |        Y |
-|---:|-----------------------:|---------:|
-|  0 |                      0 | 0.534247 |
-|  1 |                      1 | 0.531823 |
-|  2 |                      3 | 0.560462 |
-|  3 |                      8 | 0.586805 |
-|  4 |                     10 | 0.607644 |
-|    |   Restaurant20To50 |        Y |
-|---:|-------------------:|---------:|
-|  0 |                  0 | 0.516023 |
-|  1 |                  1 | 0.555317 |
-|  2 |                  3 | 0.594232 |
-|  3 |                  8 | 0.658503 |
-|  4 |                 10 | 0.662879 |
-|    |   toCoupon_GEQ15min |        Y |
-|---:|--------------------:|---------:|
-|  0 |                   0 | 0.613763 |
-|  1 |                   1 | 0.531237 |
-|    |   toCoupon_GEQ25min |        Y |
-|---:|--------------------:|---------:|
-|  0 |                   0 | 0.586974 |
-|  1 |                   1 | 0.419686 |
-|    |   direction_same |        Y |
-|---:|-----------------:|---------:|
-|  0 |                0 | 0.563688 |
-|  1 |                1 | 0.581678 |
-|    |   direction_opp |        Y |
-|---:|----------------:|---------:|
-|  0 |               0 | 0.581678 |
-|  1 |               1 | 0.563688 |
+
+|    | expiration   |        Y |
+|---:|:-------------|---------:|
+|  0 | 1d           | 0.624378 |
+|  1 | 2h           | 0.495967 |
 
 
-
-</details>
-
-Apart from the attributes we already looked at, `education` and `expiration` seem interesting.
 
 ##### <font color='blue'>Though `education` = 'Some High School' showed high acceptance rate, the number of entries for this is too low to be a good indicator</font>
 
@@ -915,6 +772,129 @@ Index(['destination', 'passenger', 'weather', 'temperature', 'time', 'coupon',
        'RestaurantLessThan20', 'Restaurant20To50', 'toCoupon_GEQ15min',
        'toCoupon_GEQ25min', 'direction_same', 'direction_opp', 'Y'],
       dtype='object')
+
+##### <font color='blue'>Based on all the above analysis we can come up with some basic hypothesis:</font>
+
+##### <font color='blue'>1. Coupon type seem to affect the acceptance rate - Carry Out and Restaurant(less than 20) show highest acceptance rate</font>
+##### <font color='blue'>2. Passenger type has some influence. Those traveling with Friends or Partner seem to more readily accept coupon</font>
+##### <font color='blue'>3. Expiration has a slight influence. Longer the expiration , more readily the coupon is accepted.</font>
+##### <font color='blue'>4. All other features have little to no influence on acceptance rate given the whole dataset.</font>
+
+
+### 4.3 Exploratory Data Analysis By Coupon Type
+
+The questions answered here are:
+1. Is there a correlation between frequency of business visit to the coupon acceptance?
+2. What other attributes affect coupon acceptance keeping frequency of business visit constant?
+3. Can a hypothesis be made for the acceptance of coupon?
+
+#### 4.3.1 `Bar` Coupon Analysis
+Following is the correlation heatmap with Bar coupon only data. This shows `Bar` has better correlation with Y.
+
+![alt text](images/image_bar_heat.png)
+
+Proportion of Bar coupons accepted : 0.40
+Acceptance rate between Bar frequency greater than 1 and less than 1 :
+
+Acceptance rate with frequency > 1 : 0.69
+Acceptance rate with frequency <= 1:  0.28
+
+Definitely offer Bar coupon to those who frequenct the business more.
+
+Even if other attributes like income, age, passenger, occupation were included, for Bar with higher frequency the acceptance rate remained around 0.7 and for lower frequency it was 0.3.
+
+##### <font color='blue'>We can conclude from this that Bar coupon acceptance increases with Bar frequency alone.</font>
+
+#### 4.3.2 `CarryAway` Coupon Analysis
+Following is the correlation heat map with CarryAway only data. There is not clear correlation seen here
+
+![alt text](images/image_carry_heat.png)
+
+Proportion of CarryAway coupons accepted: 0.73  which is much higher than Bar
+
+Acceptance rate with frequency of visit > 1 : 0.74
+Acceptance rate with frequency of visit <=1 : 0.67
+
+Not a huge difference, the frequency is not a great indicator to offer the coupon unlike the Bar data.
+
+One interesting find between those who CarryAway more frequently and those who don't is that, other attributes like income, age, passenger play a bigger role when CarryAway < 1. This was not observed with Bar coupons.
+
+###### CarryAway >= 1:
+Without Kid Passenger:  0.73
+With Kid Passenger   :  0.70
+
+Age <= 25: 0.73
+Age > 25: 0.73
+
+Income < 30000 : 0.75
+Income >= 30000 : 0.73
+
+###### CarryAway < 1:
+Without Kid Passenger:  0.75
+With Kid Passenger   :  0.66
+
+Age <= 25: 0.88
+Age > 25: 0.68
+
+Income < 30000 : 1.0
+Income >= 30000 : 0.69
+
+##### <font color='blue'> In conclusion, if CarryAway > 1, always a good idea to offer the Carry Out coupon. If not, lower income, younger, non-kid passenger drivers could be offered the coupon</font>
+
+#### 4.3.2 `Restaurant20-50` Coupon Analysis
+Following is the correlation heat map with Restaurant20-50 coupon only data. There is a slight correlation seen with the frequency of visits to Y.
+
+![alt text](images/image_restexp_heat.png)
+
+Proportion of CarryAway coupons accepted: 0.44
+
+Acceptance rate with frequency of visit >  1 : 0.56
+Acceptance rate with frequency of visit <= 1: 0.38
+
+Definitely an option to offer this coupon if the frequency of visit is higher.
+
+While the other attributes like income, age, passenger don't affect acceptance rate when frequency is > 1 , `income` plays a slight role when frequency is <=1 
+Income > 30000 : 0.4
+Income <= 30000 : 0.3
+
+##### <font color='blue'> In conclusion, if Restaurant20-50 > 1, can consider offering the coupon. If not, best not to offer this coupon. </font>
+
+#### 4.3.3 Quick Analysis of `CoffeHouse` and `RestaurantLessThan20` Coupons:
+Lets look at the correlation heat map for both.
+
+###### Coffee House
+![alt text](images/image_coffee_heat.png)
+
+This shows positive correlation with Y similar to Bar. We can hypothesize that Coffee coupons should be offered to drivers who frequently visit the business
+
+###### Restaurant Less Than 20
+![alt text](images/image_restcheap_heat.png)
+
+Here this is no strong correlation. This will need more analysis. But given the histogram in the EDA, similar to CarryAway, this category also showed high acceptance rate. So we can assume this coupon will be accepted generally.
+
+## 5.0 Conclusion
+
+##### <font color='green'>1. Who should be offered the Bar coupon?</font>
+###### <font color='blue'> Those who visit Bar more than once a month should be offered the Bar coupon</font>
+
+##### <font color='green'>1. Who should be offered the Carry Out coupon?</font>
+###### <font color='blue'> Those who do CarryAway more than once a month should definitely be offered this coupon. Otherwise, lower income or younger than 25 or no kid passenger drivers should be offered this coupon</font>
+
+##### <font color='green'>1. Who should be offered the Restaurant 20-50 coupon?</font>
+###### <font color='blue'> Only when the drivers have frequented the business more than once a month or higher should be offered this coupon</font>
+
+##### <font color='green'>1. Who should be offered the CoffeeHouse coupon?</font>
+###### <font color='blue'> Based on quick analysis, we will go by frequency of business visit more than once a month</font>
+
+##### <font color='green'>1. Who should be offered the RestaurantLessThan20 coupon?</font>
+###### <font color='blue'> Generally this is a good coupon to offer. Need more analysis to fine tune the criteria.</font>
+
+
+
+
+
+ 
+
 
 
 
