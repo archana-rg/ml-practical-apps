@@ -169,237 +169,236 @@ By far, the `car` column has a large number of missing values. Most likey desici
 
 First lets view the value counts for each column to understand the structure:
 
-<details>
 <ValueCounts>
 ------------------------
 
-destination
-No Urgent Place    6283
-Home               3237
-Work               3164
-Name: count, dtype: int64
+| destination     |   count |
+|:----------------|--------:|
+| No Urgent Place |    6283 |
+| Home            |    3237 |
+| Work            |    3164 |
 ------------------------
 
-passanger
-Alone        7305
-Friend(s)    3298
-Partner      1075
-Kid(s)       1006
-Name: count, dtype: int64
+| passanger   |   count |
+|:------------|--------:|
+| Alone       |    7305 |
+| Friend(s)   |    3298 |
+| Partner     |    1075 |
+| Kid(s)      |    1006 |
 ------------------------
 
-weather
-Sunny    10069
-Snowy     1405
-Rainy     1210
-Name: count, dtype: int64
+| weather   |   count |
+|:----------|--------:|
+| Sunny     |   10069 |
+| Snowy     |    1405 |
+| Rainy     |    1210 |
 ------------------------
 
-temperature
-80    6528
-55    3840
-30    2316
-Name: count, dtype: int64
+|   temperature |   count |
+|--------------:|--------:|
+|            80 |    6528 |
+|            55 |    3840 |
+|            30 |    2316 |
 ------------------------
 
-time
-6PM     3230
-7AM     3164
-10AM    2275
-2PM     2009
-10PM    2006
-Name: count, dtype: int64
+| time   |   count |
+|:-------|--------:|
+| 6PM    |    3230 |
+| 7AM    |    3164 |
+| 10AM   |    2275 |
+| 2PM    |    2009 |
+| 10PM   |    2006 |
 ------------------------
 
-coupon
-Coffee House             3996
-Restaurant(<20)          2786
-Carry out & Take away    2393
-Bar                      2017
-Restaurant(20-50)        1492
-Name: count, dtype: int64
+| coupon                |   count |
+|:----------------------|--------:|
+| Coffee House          |    3996 |
+| Restaurant(<20)       |    2786 |
+| Carry out & Take away |    2393 |
+| Bar                   |    2017 |
+| Restaurant(20-50)     |    1492 |
 ------------------------
 
-expiration
-1d    7091
-2h    5593
-Name: count, dtype: int64
+| expiration   |   count |
+|:-------------|--------:|
+| 1d           |    7091 |
+| 2h           |    5593 |
 ------------------------
 
-gender
-Female    6511
-Male      6173
-Name: count, dtype: int64
+| gender   |   count |
+|:---------|--------:|
+| Female   |    6511 |
+| Male     |    6173 |
 ------------------------
 
-age
-21         2653
-26         2559
-31         2039
-50plus     1788
-36         1319
-41         1093
-46          686
-below21     547
-Name: count, dtype: int64
+| age     |   count |
+|:--------|--------:|
+| 21      |    2653 |
+| 26      |    2559 |
+| 31      |    2039 |
+| 50plus  |    1788 |
+| 36      |    1319 |
+| 41      |    1093 |
+| 46      |     686 |
+| below21 |     547 |
 ------------------------
 
-maritalStatus
-Married partner      5100
-Single               4752
-Unmarried partner    2186
-Divorced              516
-Widowed               130
-Name: count, dtype: int64
+| maritalStatus     |   count |
+|:------------------|--------:|
+| Married partner   |    5100 |
+| Single            |    4752 |
+| Unmarried partner |    2186 |
+| Divorced          |     516 |
+| Widowed           |     130 |
 ------------------------
 
-has_children
-0    7431
-1    5253
-Name: count, dtype: int64
+|   has_children |   count |
+|---------------:|--------:|
+|              0 |    7431 |
+|              1 |    5253 |
 ------------------------
 
-education
-Some college - no degree                  4351
-Bachelors degree                          4335
-Graduate degree (Masters or Doctorate)    1852
-Associates degree                         1153
-High School Graduate                       905
-Some High School                            88
-Name: count, dtype: int64
+| education                              |   count |
+|:---------------------------------------|--------:|
+| Some college - no degree               |    4351 |
+| Bachelors degree                       |    4335 |
+| Graduate degree (Masters or Doctorate) |    1852 |
+| Associates degree                      |    1153 |
+| High School Graduate                   |     905 |
+| Some High School                       |      88 |
 ------------------------
 
-occupation
-Unemployed                                   1870
-Student                                      1584
-Computer & Mathematical                      1408
-Sales & Related                              1093
-Education&Training&Library                    943
-Management                                    838
-Office & Administrative Support               639
-Arts Design Entertainment Sports & Media      629
-Business & Financial                          544
-Retired                                       495
-Food Preparation & Serving Related            298
-Healthcare Practitioners & Technical          244
-Healthcare Support                            242
-Community & Social Services                   241
-Legal                                         219
-Transportation & Material Moving              218
-Architecture & Engineering                    175
-Personal Care & Service                       175
-Protective Service                            175
-Life Physical Social Science                  170
-Construction & Extraction                     154
-Installation Maintenance & Repair             133
-Production Occupations                        110
-Building & Grounds Cleaning & Maintenance      44
-Farming Fishing & Forestry                     43
-Name: count, dtype: int64
+| occupation                                |   count |
+|:------------------------------------------|--------:|
+| Unemployed                                |    1870 |
+| Student                                   |    1584 |
+| Computer & Mathematical                   |    1408 |
+| Sales & Related                           |    1093 |
+| Education&Training&Library                |     943 |
+| Management                                |     838 |
+| Office & Administrative Support           |     639 |
+| Arts Design Entertainment Sports & Media  |     629 |
+| Business & Financial                      |     544 |
+| Retired                                   |     495 |
+| Food Preparation & Serving Related        |     298 |
+| Healthcare Practitioners & Technical      |     244 |
+| Healthcare Support                        |     242 |
+| Community & Social Services               |     241 |
+| Legal                                     |     219 |
+| Transportation & Material Moving          |     218 |
+| Architecture & Engineering                |     175 |
+| Personal Care & Service                   |     175 |
+| Protective Service                        |     175 |
+| Life Physical Social Science              |     170 |
+| Construction & Extraction                 |     154 |
+| Installation Maintenance & Repair         |     133 |
+| Production Occupations                    |     110 |
+| Building & Grounds Cleaning & Maintenance |      44 |
+| Farming Fishing & Forestry                |      43 |
 ------------------------
 
-income
-$25000 - $37499     2013
-$12500 - $24999     1831
-$37500 - $49999     1805
-$100000 or More     1736
-$50000 - $62499     1659
-Less than $12500    1042
-$87500 - $99999      895
-$75000 - $87499      857
-$62500 - $74999      846
-Name: count, dtype: int64
+| income           |   count |
+|:-----------------|--------:|
+| $25000 - $37499  |    2013 |
+| $12500 - $24999  |    1831 |
+| $37500 - $49999  |    1805 |
+| $100000 or More  |    1736 |
+| $50000 - $62499  |    1659 |
+| Less than $12500 |    1042 |
+| $87500 - $99999  |     895 |
+| $75000 - $87499  |     857 |
+| $62500 - $74999  |     846 |
 ------------------------
 
-car
-Scooter and motorcycle                      22
-Mazda5                                      22
-do not drive                                22
-crossover                                   21
-Car that is too old to install Onstar :D    21
-Name: count, dtype: int64
+| car                                      |   count |
+|:-----------------------------------------|--------:|
+| Scooter and motorcycle                   |      22 |
+| Mazda5                                   |      22 |
+| do not drive                             |      22 |
+| crossover                                |      21 |
+| Car that is too old to install Onstar :D |      21 |
 ------------------------
 
-Bar
-never    5197
-less1    3482
-1~3      2473
-4~8      1076
-gt8       349
-Name: count, dtype: int64
+| Bar   |   count |
+|:------|--------:|
+| never |    5197 |
+| less1 |    3482 |
+| 1~3   |    2473 |
+| 4~8   |    1076 |
+| gt8   |     349 |
 ------------------------
 
-CoffeeHouse
-less1    3385
-1~3      3225
-never    2962
-4~8      1784
-gt8      1111
-Name: count, dtype: int64
+| CoffeeHouse   |   count |
+|:--------------|--------:|
+| less1         |    3385 |
+| 1~3           |    3225 |
+| never         |    2962 |
+| 4~8           |    1784 |
+| gt8           |    1111 |
 ------------------------
 
-CarryAway
-1~3      4672
-4~8      4258
-less1    1856
-gt8      1594
-never     153
-Name: count, dtype: int64
+| CarryAway   |   count |
+|:------------|--------:|
+| 1~3         |    4672 |
+| 4~8         |    4258 |
+| less1       |    1856 |
+| gt8         |    1594 |
+| never       |     153 |
 ------------------------
 
-RestaurantLessThan20
-1~3      5376
-4~8      3580
-less1    2093
-gt8      1285
-never     220
-Name: count, dtype: int64
+| RestaurantLessThan20   |   count |
+|:-----------------------|--------:|
+| 1~3                    |    5376 |
+| 4~8                    |    3580 |
+| less1                  |    2093 |
+| gt8                    |    1285 |
+| never                  |     220 |
 ------------------------
 
-Restaurant20To50
-less1    6077
-1~3      3290
-never    2136
-4~8       728
-gt8       264
-Name: count, dtype: int64
+| Restaurant20To50   |   count |
+|:-------------------|--------:|
+| less1              |    6077 |
+| 1~3                |    3290 |
+| never              |    2136 |
+| 4~8                |     728 |
+| gt8                |     264 |
 ------------------------
 
-toCoupon_GEQ5min
-1    12684
-Name: count, dtype: int64
+|   toCoupon_GEQ5min |   count |
+|-------------------:|--------:|
+|                  1 |   12684 |
 ------------------------
 
-toCoupon_GEQ15min
-1    7122
-0    5562
-Name: count, dtype: int64
+|   toCoupon_GEQ15min |   count |
+|--------------------:|--------:|
+|                   1 |    7122 |
+|                   0 |    5562 |
 ------------------------
 
-toCoupon_GEQ25min
-0    11173
-1     1511
-Name: count, dtype: int64
+|   toCoupon_GEQ25min |   count |
+|--------------------:|--------:|
+|                   0 |   11173 |
+|                   1 |    1511 |
 ------------------------
 
-direction_same
-0    9960
-1    2724
-Name: count, dtype: int64
+|   direction_same |   count |
+|-----------------:|--------:|
+|                0 |    9960 |
+|                1 |    2724 |
 ------------------------
 
-direction_opp
-1    9960
-0    2724
-Name: count, dtype: int64
+|   direction_opp |   count |
+|----------------:|--------:|
+|               1 |    9960 |
+|               0 |    2724 |
 ------------------------
 
-Y
-1    7210
-0    5474
+|   Y |   count |
+|----:|--------:|
+|   1 |    7210 |
+|   0 |    5474 |
 
 </ValueCounts>
-</details>
 
 Based on analysing the above, the following decisions are taken:
 
