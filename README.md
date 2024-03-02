@@ -1,12 +1,12 @@
 # Case Study : Which coupon to offer drivers?
-The dataset under study contains information on drivers who were offered a coupon to one of the following : Bar, Carry Out Food Place, Cheap Restaurant, Expensive Restaurant, Coffee House, and whether they accepted it or not along with other characteristics. The goal of this case study is to come up with rules which can help determine what coupon a particular driver with given characteristics will accept with high probability.
+The dataset under study contains information on drivers who were offered a coupon to one of the following : Bar, Carry Out Food Place, Cheap Restaurant, Expensive Restaurant, Coffee House, and whether they accepted it or not along with other characteristics. The goal of this case study is to come up with rules which can help determine the coupon, a particular driver with given characteristics will accept with high probability.
 
 ## 1. Business Understanding
-To promote local businesses, coupons to those businesses are offered to drivers passing by. While the proximity of the business is a factor in determining what coupon to offer, the other important factor is to know whether the driver will be inclined to accept the coupon. For example, if  there is a Bar and a Coffee House nearby, which coupon would the driver accept if he has a minor in the vehicle? It will help to know the probability of accepting the coupons iven the conditions which in turn will help with the original goal of promoting local businesses.
+To promote local businesses, coupons to those businesses are offered to drivers passing through. While the proximity of the business is a factor in determining what coupon to offer, the other important factor is to know whether the driver will be inclined to accept the coupon. For example, if  there is a Bar and a Coffee House nearby, which coupon would the driver accept if he has a minor in the vehicle? It will help to know the probability of accepting the coupons given the conditions which in turn will help with the original goal of promoting local businesses.
 
 ### 1.1 Business Goals
 1. Gain insight into characteristics that determine coupon acceptance
-2. Put down rules to offer a particular coupon to a driver
+2. Put down rules to offer a particular coupon to a driver(in this case study the focus is on Bar, Restaurant20-50 and CarryAway coupons)
 
 ## 2. Data Understanding
 Here we take an initial look at the given data and explore the quality of it.
@@ -417,20 +417,23 @@ In this section, we will act on the observation and decisions taken above.
 2. Fill null values or remove them
 3. Fix all structural issues
 
+Removing Duplicates:
 With the duplicates removed our dataset size is : (12610, 26)
 
+Fill null values or remove:
 ##### <font color='blue'>The `car` column was dropped as filling it based on other columns would only be redundant anyway.</font>
 
 For the `Bar` `CoffeeHouse` `CarryAway` `RestaurantLessThan20`  `Restaurant20To50` columns the following approach was used:
-#### <font color='blue'> Find the high, low, median acceptance rate for coupun type and use them to fill the missing values</font>
+#### <font color='blue'> Find the high, low, median acceptance rate for coupon type and use them to fill the missing values</font>
 
 Let X be one of `Bar` `CoffeeHouse` `CarryAway` `RestaurantLessThan20`  `Restaurant20To50`
-1. Group data by X, coupon and find mean value of Y
-2. Use the dataframe above to get the highest mean for coupon=X and its corresponding X value
-3. Do the same to get lowest mean for coupon=X and its corresponding X value
-4. The above two can be used to fill the missing values when coupon=X and Y is 1 or 0
-5. For those missing values where coupon is not same as X, get the median mean value and its label.
+1. Group data by (X, coupon) and find mean value of Y
+2. Use the dataframe above to get the highest mean for coupon that is same category as X and its corresponding X value
+3. Do the same to get lowest mean for coupon that is same category as X and its corresponding X value
+4. The above two can be used to fill the missing values when coupon is same category as X and Y is 1 or 0
+5. For those missing values where coupon is not same category as X, get the median mean value and its label and use it to fill.
 
+Fix Structural issues:
 After fixing all the structural issues, the dtypes look like this:
 
 destination             object
@@ -669,7 +672,6 @@ And the value counts are:
 |                0 |    9892 |
 |                1 |    2718 |
 ------------------------
-distance between histograms
 
 </details>
 
@@ -697,14 +699,14 @@ We don't see any attribute that has prominent outliers.
 ##### <font color='blue'> One interesting outcome from the above plot is that`toCoupon_GEQ5mins` adds no value to the dataset, it is always set to 1.We can drop this column </font>
 
 ### 4.2 Exploratory Data Analysis On Whole Dataset
-Here we will find correlation and plot visualization of various attributes on whole data set first and then dig deeper into each coupon type.
+Here we will find correlation and plot visualization of various attributes on whole data set.
 
 #### 4.2.1 Income Attribute Analysis
 Below shows the coupon acceptance histogram:
 
 ![alt text](images/image-2.png)
 
-Income does not seem to have any effect on coupon acceptance. The distribution of income is not showing anything interesting either.
+Income does not seem to have any effect on coupon acceptance.
 
 #### 4.2.2 Age Attribute Analysis
 The coupon acceptance by `age` histogram is not very interesting in terms of acceptance rate.
@@ -794,19 +796,24 @@ Following is the correlation heatmap with Bar coupon only data. This shows `Bar`
 ![alt text](images/image_bar_heat.png)
 
 Proportion of Bar coupons accepted : 0.40
-Acceptance rate between Bar frequency greater than 1 and less than 1 :
 
-Acceptance rate with frequency > 1 : 0.69
-Acceptance rate with frequency <= 1:  0.28
+Acceptance rate with Bar frequency > 1 : 0.69
+Acceptance rate with Bar frequency <= 1:  0.28
 
-Definitely offer Bar coupon to those who frequenct the business more.
+Definitely offer Bar coupon to those who frequent the business more.
+
+Acceptance rate - Bar > 1 and age > 25 is  0.7009345794392523
+Acceptance rate - others is  0.33122629582806573
+
+Acceptance rate - Bar > 1 and no kid and farming is 0.7168458781362007
+Acceptance rate - others is  0.33122629582806573
 
 Even if other attributes like income, age, passenger, occupation were included, for Bar with higher frequency the acceptance rate remained around 0.7 and for lower frequency it was 0.3.
 
 ##### <font color='blue'>We can conclude from this that Bar coupon acceptance increases with Bar frequency alone.</font>
 
 #### 4.3.2 `CarryAway` Coupon Analysis
-Following is the correlation heat map with CarryAway only data. There is not clear correlation seen here
+Following is the correlation heat map with CarryAway only data. There is no clear correlation seen here
 
 ![alt text](images/image_carry_heat.png)
 
@@ -839,7 +846,7 @@ Age > 25: 0.68
 Income < 30000 : 1.0
 Income >= 30000 : 0.69
 
-##### <font color='blue'> In conclusion, if CarryAway > 1, always a good idea to offer the Carry Out coupon. If not, lower income, younger, non-kid passenger drivers could be offered the coupon</font>
+##### <font color='blue'> In conclusion, if CarryAway > 1, always a good idea to offer the Carry Out coupon. If not, lower income or younger or non-kid passenger drivers could be offered the coupon</font>
 
 #### 4.3.2 `Restaurant20-50` Coupon Analysis
 Following is the correlation heat map with Restaurant20-50 coupon only data. There is a slight correlation seen with the frequency of visits to Y.
@@ -870,7 +877,7 @@ This shows positive correlation with Y similar to Bar. We can hypothesize that C
 ###### Restaurant Less Than 20
 ![alt text](images/image_restcheap_heat.png)
 
-Here this is no strong correlation. This will need more analysis. But given the histogram in the EDA, similar to CarryAway, this category also showed high acceptance rate. So we can assume this coupon will be accepted generally.
+Here there is no strong correlation. This will need more analysis. But given the histogram in the EDA, similar to CarryAway, this category also showed high acceptance rate. So we can assume this coupon will be accepted generally.
 
 ## 5.0 Conclusion
 
@@ -890,7 +897,7 @@ Here this is no strong correlation. This will need more analysis. But given the 
 ###### <font color='blue'> Generally this is a good coupon to offer. Need more analysis to fine tune the criteria.</font>
 
 
-Some next steps:
+#### Some next steps:
 1. More data analysis of CoffeHouse and RestaurantLessThan20 coupons.
 2. Choosing the right model for the data
 3. Modeling the data and tuning it.
