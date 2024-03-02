@@ -685,7 +685,7 @@ Here we will do the following:
 4. Draw a general hypothesis on the whole dataset with regards to acceptance rate
 
 Lets check the overall heatmap for correlation
-![alt text](image-8.png)
+![alt text](images/image-8.png)
 
 #### <font color = 'blue'>The above heatmap does not make sense. It shows poor correlation between features, especially between features and the target variable 'Y'. This could be due to the data being mixed up with all coupon types. Later we will redo the heatmap on per coupon data</font>
 
