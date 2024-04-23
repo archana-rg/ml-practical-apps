@@ -1,4 +1,4 @@
-# Factors that drive price of used cars
+# Study of factors that drive price of used cars
 The dataset under study contains information on used cars and their sale price. The goal of this case study is to come up with what features drive the sale price of a used car.
 
 ## 1. Business Understanding
