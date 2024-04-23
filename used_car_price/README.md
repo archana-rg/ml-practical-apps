@@ -134,11 +134,11 @@ Analysed the columns we planned to use OrdinalEncoder on: `size`, `condition`, `
 
 ![alt text](images/size_price.png)
 
-sub-compact seems more expensive than mid-size
+Sub-compact seems more expensive than mid-size
 
 ![alt text](images/condition_price.png)
 
-good condition seems more expensive than excellent
+Good condition seems more expensive than excellent
 
 ![alt text](images/good_cond.png)
 
@@ -164,10 +164,11 @@ ct = ColumnTransformer(transformers=[
 ```
 
 Final dataset is as follows:
-
+```
 Index: 162505 entries, 28 to 426875
 Data columns (total 92 columns):
 dtypes: float64(90), int64(2)
+```
 
 ![alt text](images/final_cols.png)
 
@@ -356,7 +357,7 @@ Train R2 Score : 0.390
 Test R2 Score : 0.370
 ```
 
-This score is in the same ballpark as with Feature Importance but it will result in slow computation to go with higher number of features.
+This score is in the same ballpark as with Feature Importance but it will result in slow computation if we go with higher number of features.
 
 With PCA, the performance is much poorer with top 10 features:
 ```
