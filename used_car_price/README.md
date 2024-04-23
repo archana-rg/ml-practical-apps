@@ -61,12 +61,15 @@ The major structural issue is that columns which say type as 'object' are not st
 #### General Observations
 
 ![alt text](images/orig_hist.png)
+
 Existing numerical columns have skewed distribution, they need to be normalized
 
 ![alt text](images/mfg_price.png)
+
 Ferrari has a very high price point compared to others which is accurate
 
 ![alt text](images/boxplot_price.png)
+
 We seem to have a lot of outliers in 'price', have to handle this after we fill/remove NaN
 
 Based on analysing the above, the following decisions are taken:
@@ -305,10 +308,11 @@ R2 Score is used to gauge how well our model fits the dataset.
 Top 10 features hyperparameters: polynomial degree:2 and Ridge alpha:10
 
 Running with 5 to 45 features:
-![alt text](images/importance.png)
+
+![alt text](images/TestMSE.png)
 
 Will pick 40 features as it gives better R2 score:
-
+```
 Num features 10:
 Train R2 : 0.458
 Test R2: 0.424
@@ -328,42 +332,54 @@ Test R2: 0.507
 Num features 45:
 Train R2: 0.525
 Test R2: 0.502
-
+```
 Top 10 features were fitted with Linear Regression and Lasso as well to find hyperparameters.
 Linear Regression resulted in lower R2 score. Lasso performed as well as the Ridge regression.
 
 Linear Regression with 11 features:(highest R2)
+```
 Train R2: 0.458
 Test R2: 0.422
+```
 
 Lasso Regression with 40 features:
+```
 Train R2: 0.520
 Test R2: 0.507
+```
 
 #### SFS and PCA:
 
 With SFS, the train and test R2 for 10 features are:
+```
 Train R2 Score : 0.390
 Test R2 Score : 0.370
+```
 
 This score is in the same ballpark as with Feature Importance but it will result in slow computation to go with higher number of features.
 
 With PCA, the performance is much poorer with top 10 features:
+```
 Train R2 Score : 0.278
 Test R2 Score : 0.283
+```
 
 #### Cross Validation
 Doing cross validation using the top 40 features on the CV set:
+```
 R2 Score : 0.474
+```
 
 This is a little lower than the dev/test set but same when rounded to 1 digit.
 
 
 ## 5.0 Evaluation
 To further evaluate the number of features we need to pick, performed cross validation test with different number of features.
+```
 R2 with 10 features : 0.438
 R2 with 35 features : 0.477
 R2 with 20 features : 0.450
+```
 
 The cross validation set R2 follows the dev/test set R2 closely in all cases. So, still 40 features is the best so far.
 Overall the model fits the dataset 50%. This is the best we can obtain with the current cleaning,prep and modeling methods. There are other ways to further improve the model by analysing dataset statewise,regionwise or even manufacturerwise 
@@ -372,13 +388,17 @@ Overall the model fits the dataset 50%. This is the best we can obtain with the 
 After analysing the used car dataset with supervised machine learning techniques, the below are the top three features that drive the price.
 
 Year:
+
 ![alt text](images/year_price_scat.png)
 
 Odometer:
+
 ![alt text](images/odo_price_scat.png)
 
 Cylinders:
+
 ![alt text](images/cyl_price_scat.png)
+
 
 Other findings from the analysis are:
 1. Apart from the top three listed above, `Fuel`, `Manufacturer`, `Type`, `Transmission`, `Condition` influence the price
