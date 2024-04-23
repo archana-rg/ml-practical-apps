@@ -14,7 +14,7 @@ In earlier days, when all cars were gas or diesel driven, there was enough exper
 Here we take an initial look at the given data and explore the quality of it.
 
 ### 2.1 Gather Data And Describe
-Data comes from UCI Machine Learning repository and was collected via a survey on Amazon Mechanical Turk.
+The original dataset is from Kaggle and it contained information on 3 million used cars. The dataset used is pruned and contains information on 426K cars to ensure speed of processing. 
 
 Here is a sample of the data:
 
