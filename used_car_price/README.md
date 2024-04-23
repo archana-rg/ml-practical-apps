@@ -2,7 +2,7 @@
 The dataset under study contains information on used cars and their sale price. The goal of this case study is to come up with what features drive the sale price of a used car.
 
 ## 1. Business Understanding
-In earlier days, when all cars were gas or diesel driven, there was enough experience among the staff to determine what cars would sell at a high price. With the introduction of hybrid and electric vehicles and autonomous features, there are different factors that influence the used car sale. Data science can see hidden patterns and provide a better way to determine the factors that drive sale price and help the business make more profits. The objectives for this data science project are:
+In earlier days, when all cars were gas or diesel driven, there was enough experience among the staff to determine what cars would sell at a high price. With the introduction of hybrid and electric vehicles and autonomous features, there are different factors that influence the used car sale. Data science can see hidden patterns and provide a better way to determine the factors that drive sale price and help the business make more profits.
 
 
 ### 1.1 Business Goals
