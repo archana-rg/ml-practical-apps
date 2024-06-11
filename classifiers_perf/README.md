@@ -586,12 +586,14 @@ Below is the table with the models, best params and accuracy. Not comparing trai
 Overall, SVM took a very long time to train even with just one parameter.
 
 <div class="overflow-table">
+
 |    | Model              | Best Params                                                                                                       |   Train Accuracy |   Test Accuracy |
 |---:|:-------------------|:------------------------------------------------------------------------------------------------------------------|-----------------:|----------------:|
 |  0 | LogisticRegression | {'lgr__C': 1.599858719606058, 'lgr__penalty': 'l1', 'lgr__solver': 'liblinear'}                                   |         0.888688 |        0.885663 |
 |  1 | KNN                | {'knn__metric': 'l2', 'knn__n_neighbors': 5, 'knn__weights': 'uniform'}                                           |         0.898245 |        0.874016 |
 |  2 | DecisionTrees      | {'dtree__criterion': 'gini', 'dtree__max_depth': 8, 'dtree__min_samples_leaf': 1, 'dtree__min_samples_split': 10} |         0.897958 |        0.883202 |
 |  3 | SVM                | {'kernel' = 'poly'}                                                                                               |         0.893979 |        0.887139 |
+
 </div>
 
 The accuracy scores are similar to default models. But we know the more important score is recall/precision
