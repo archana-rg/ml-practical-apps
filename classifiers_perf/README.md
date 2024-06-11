@@ -592,6 +592,7 @@ Overall, SVM took a very long time to train even with just one parameter.
 |  1 | KNN                | {'knn__metric': 'l2', 'knn__n_neighbors': 5, 'knn__weights': 'uniform'}                                           |         0.898245 |        0.874016 |
 |  2 | DecisionTrees      | {'dtree__criterion': 'gini', 'dtree__max_depth': 8, 'dtree__min_samples_leaf': 1, 'dtree__min_samples_split': 10} |         0.897958 |        0.883202 |
 |  3 | SVM                | {'kernel' = 'poly'}                                                                                               |         0.893979 |        0.887139 |
+</div>
 
 The accuracy scores are similar to default models. But we know the more important score is recall/precision
 
@@ -614,8 +615,7 @@ The default models AUC scores don't look so bad. Logistic Regression has the hig
 
 
 #### Tuned Model ROC-AUC comparison
-The tuning seems to have helped only the Decision Tree quite well. We also used many params to tune the Decision Tree.
-For others, with increased params, the fit time was quite big and not feasible to tune many parameters.
+The tuning seems to have helped only the Decision Tree quite well. For LogisticRegression and KNN, it does not seem to improve the AUC score. For Support vector machine, the tuning was cumbersome with many parameters.
 
 ![alt text](images/tuned_roc.png)
 
