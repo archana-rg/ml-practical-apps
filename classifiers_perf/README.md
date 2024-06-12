@@ -225,7 +225,7 @@ Features `cons.price.idx` and `cons.conf.idx` also show somw correlation with `y
 
 ![alt text](images/empvar_box.png)
 
-Though `month` does not seem to have much correlation, the month of March seems to have higher sign up rate than other months.
+Though `month` does not seem to have much correlation, the months of March, September, October, December seem to have higher sign up rate than other months.
 ![alt text](images/month_count.png)
 
 
@@ -489,22 +489,18 @@ Test     : (6096, 52)
 
 The top most important features with importance mean and standard deviation are as follows:
 ```
-emp.var.rate --> 0.200 +/- 0.004
-cons.price.idx --> 0.080 +/- 0.003
-nr.employed --> 0.022 +/- 0.002
+emp.var.rate --> 0.203 +/- 0.004
+cons.price.idx --> 0.086 +/- 0.003
+nr.employed --> 0.025 +/- 0.002
 pdays    --> 0.011 +/- 0.001
 euribor3m --> 0.005 +/- 0.001
 contact_telephone --> 0.004 +/- 0.001
+month_jun --> 0.002 +/- 0.001
+poutcome_success --> 0.002 +/- 0.000
 cons.conf.idx --> 0.002 +/- 0.001
-poutcome_failure --> 0.002 +/- 0.000
-month_mar --> 0.001 +/- 0.001
-poutcome_success --> 0.001 +/- 0.000
-poutcome_nonexistent --> 0.001 +/- 0.000
-previous --> 0.001 +/- 0.000
-day_of_week_thu --> 0.001 +/- 0.000
-month_apr --> 0.001 +/- 0.000
+job_student --> 0.001 +/- 0.000
 education_basic.4y --> 0.001 +/- 0.000
-job_unemployed --> 0.000 +/- 0.000
+education_basic.9y --> 0.001 +/- 0.000
 ```
 This aligns with the correlation numbers we got earlier. 
 
@@ -515,7 +511,8 @@ The approach we will take to finding a good model is as follows:
 
 1. Evaluate a baseline model
 2. Fit default LogisticRegression, KNN, Support Vector Machine and Decision Tree models and tabulate accuracy
-2. Fine tune the above models through GridSearchCV and observe how accuracy, precision, recall and runtime vary.
+3. Fine tune the above models through GridSearchCV and observe how accuracy, precision, recall and runtime vary.
+
 
 #### Performance metrics
 The most important metric here is the recall for the positive class. We want to correctly predict all customers who will sign up for term deposit.
@@ -582,17 +579,17 @@ We can use only the most important features to further tune the models.
 
 #### Hyperparameter tuning
 
-Below is the table with the models, best params and accuracy. Not comparing train time here because the number of parameters tuned is different for each model.
-Overall, SVM took a very long time to train even with just one parameter.
+Below is the table with the models, best params, train time and accuracy. Overall, SVM took a very long time to train even with just one parameter.
+Logistic Regression and KNN were tried with many parameters but the results were similar and longer runtime. Here below have used only basic parameter tuning for those two models.
 
 <div class="overflow-table">
 
-|    | Model              | Best Params                                                                                                       |   Train Accuracy |   Test Accuracy |
-|---:|:-------------------|:------------------------------------------------------------------------------------------------------------------|-----------------:|----------------:|
-|  0 | LogisticRegression | {'lgr__C': 1.599858719606058, 'lgr__penalty': 'l1', 'lgr__solver': 'liblinear'}                                   |         0.888688 |        0.885663 |
-|  1 | KNN                | {'knn__metric': 'l2', 'knn__n_neighbors': 5, 'knn__weights': 'uniform'}                                           |         0.898245 |        0.874016 |
-|  2 | DecisionTrees      | {'dtree__criterion': 'gini', 'dtree__max_depth': 8, 'dtree__min_samples_leaf': 1, 'dtree__min_samples_split': 10} |         0.897958 |        0.883202 |
-|  3 | SVM                | {'kernel' = 'poly'}                                                                                               |         0.893979 |        0.887139 |
+|    | Model              | Best Params                                                                                                          |   Train Time |   Train Accuracy |   Test Accuracy |
+|---:|:-------------------|:---------------------------------------------------------------------------------------------------------------------|-------------:|-----------------:|----------------:|
+|  0 | LogisticRegression | {'lgr__C': 1.0}                                                                                                      |      4.71485 |         0.887905 |        0.887176 |
+|  1 | KNN                | {'knn__n_neighbors': 3}                                                                                              |     18.1078  |         0.891923 |        0.872745 |
+|  2 | DecisionTrees      | {'dtree__criterion': 'entropy', 'dtree__max_depth': 9, 'dtree__min_samples_leaf': 4, 'dtree__min_samples_split': 10} |     31.0417  |         0.894301 |        0.885208 |
+|  3 | SVM                | {'kernel' = 'poly'}                                                                                                  |     61.6277  |         0.888684 |        0.88652  |
 
 </div>
 
@@ -622,15 +619,15 @@ The tuning seems to have helped only the Decision Tree quite well. For LogisticR
 ![alt text](images/tuned_roc.png)
 
 #### Other Considerations
-Tried Polynomial features of degree 2 and extracted top features from it to fit with DecisionTree, the results were similar. No improvement. It was not worth 
-the really long runtime.
+Tried Polynomial features of degree 2 of the top features identified prior to fit with DecisionTree, the results were only slightly improved. It was not worth the really long runtime.
 
+![alt text](images/poly_roc.png)
 
 ## 6.0 Deployment
 The tuned DecisionTree Classifier has the highest AUC score and train time is reasonable. This model can be deployed to predict if a customer would sign up for 
 term deposit. Logistic Regression is a close second. Support Vector Machine took long train times with no significant improvement in any of the performance metrics.
 
-The top ten features that influence the outcome are as follows:
+The top features that influence the outcome are as follows:
 1. Nation's Employment Variance Rate
 2. Consumer Price Index
 3. Number of Employees in the bank(indicator of size of bank)
@@ -640,7 +637,6 @@ The top ten features that influence the outcome are as follows:
 7. Consumer Confidence Index
 8. Outcome of previous marketing campaign
 9. Month of contact
-10. Number of contact performed before this contact for the customer
 
 Not all features above can be controlled by the bank. The ones that can be like the month of contact, confidence index can be taken into account for
 any new campaign.
