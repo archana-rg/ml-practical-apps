@@ -111,7 +111,8 @@ y                 0
 
 One issue with the categorical features is that many of them have a value 'unknown' in them. These entries need to be nullified and removed.
 
-<details>
+<div class="overflow-table">
+
 | job           |   count |
 |:--------------|--------:|
 | admin.        |   10419 |
@@ -189,7 +190,8 @@ One issue with the categorical features is that many of them have a value 'unkno
 |:----|--------:|
 | no  |   36537 |
 | yes |    4639 |
-</details>
+
+</div>
 
 #### General Observations
 
@@ -201,6 +203,7 @@ yes     4639
 ```
 Features like `age` `housing` `education` or `marital` don't show much correlation with `y` at all.
 As an example, below is a plot for `education` and `age`.
+
 ![alt text](images/education_count.png)
 
 ![alt text](images/age_box.png)
@@ -208,11 +211,13 @@ As an example, below is a plot for `education` and `age`.
 The median age is almost same for both 'yes' and 'no'. There are some outliers here.
 
 Features like `euribor3m` and `campaign` show some correlation.
+
 ![alt text](images/campaign_scatter.png)
 
 ![alt text](images/euribor_line.png)
 
 ![alt text](images/euribor_box.png)
+
 The median is shifted quite a bit between 'yes' and 'no'
 
 Features `cons.price.idx` and `cons.conf.idx` also show somw correlation with `y` though not as strong as `euribor3m`
@@ -226,6 +231,7 @@ Features `cons.price.idx` and `cons.conf.idx` also show somw correlation with `y
 ![alt text](images/empvar_box.png)
 
 Though `month` does not seem to have much correlation, the months of March, September, October, December seem to have higher sign up rate than other months.
+
 ![alt text](images/month_count.png)
 
 
