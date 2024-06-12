@@ -220,7 +220,7 @@ Features like `euribor3m` and `campaign` show some correlation.
 
 The median is shifted quite a bit between 'yes' and 'no'
 
-Features `cons.price.idx` and `cons.conf.idx` also show somw correlation with `y` though not as strong as `euribor3m`
+Features `cons.price.idx` and `cons.conf.idx` also show some correlation with `y` though not as strong as `euribor3m`
 
 ![alt text](images/price_box.png)
 
@@ -580,13 +580,13 @@ Lets look at the precision and recall.
 
 ![alt text](images/pres_recall_imp.png)
 
-Here, precision seems to be either better are same across classifiers and recall is slightly lesser or same. No significant difference.
+Here, precision seems to be either better or same across classifiers and recall is slightly lesser or same. No significant difference.
 We can use only the most important features to further tune the models.
 
 #### Hyperparameter tuning
 
 Below is the table with the models, best params, train time and accuracy. Overall, SVM took a very long time to train even with just one parameter.
-Logistic Regression and KNN were tried with many parameters but the results were similar and longer runtime. Here below have used only basic parameter tuning for those two models.
+Logistic Regression and KNN were tried with many parameters but the results were similar but with longer runtime. Here, below we have only basic parameter tuning for those two models.
 
 <div class="overflow-table">
 
@@ -620,7 +620,7 @@ The default models AUC scores don't look so bad. Logistic Regression has the hig
 
 
 #### Tuned Model ROC-AUC comparison
-The tuning seems to have helped only the Decision Tree quite well. For LogisticRegression and KNN, it does not seem to improve the AUC score. For Support vector machine, the tuning was cumbersome with many parameters.
+The tuning seems to have helped only the Decision Tree quite well. For LogisticRegression and KNN, it does not seem to improve the AUC score. For Support vector machine, the tuning was cumbersome with many parameters but the result was not improved.
 
 ![alt text](images/tuned_roc.png)
 
@@ -630,8 +630,7 @@ Tried Polynomial features of degree 2 of the top features identified prior to fi
 ![alt text](images/poly_roc.png)
 
 ## 6.0 Deployment
-The tuned DecisionTree Classifier has the highest AUC score and train time is reasonable. This model can be deployed to predict if a customer would sign up for 
-term deposit. Logistic Regression is a close second. Support Vector Machine took long train times with no significant improvement in any of the performance metrics.
+The tuned DecisionTree Classifier and the Logistic Regression have the highest AUC score and train time is reasonable. Between these two models, LogisticRegression has much lesser train time and did not require much hyperparameter tuning.Support Vector Machine took long train times with no significant improvement in any of the performance metrics. Hence, LogisticRegression is a good choice for this task.
 
 The top features that influence the outcome are as follows:
 1. Nation's Employment Variance Rate
