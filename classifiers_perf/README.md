@@ -625,7 +625,7 @@ The tuning seems to have helped only the Decision Tree quite well. For LogisticR
 ![alt text](images/tuned_roc.png)
 
 #### Other Considerations
-Tried Polynomial features of degree 2 of the top features identified prior to fit with DecisionTree, the results were only slightly improved. It was not worth the really long runtime.
+Tried Polynomial features of degree 2 of the top features identified prior to fit with DecisionTree, the results were only slightly improved. It was not worth the really long runtime(from 31 for degree 1 to 118 for degree 2). 
 
 ![alt text](images/poly_roc.png)
 
